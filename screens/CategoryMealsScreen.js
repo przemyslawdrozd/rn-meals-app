@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
-const FetchFonts = () => {
+const fetchFonts = () => {
 	Font.loadAsync({
 		'open-sans': require('../assets/fonts/OpenSans-Regular.tff'),
 		'open-sans-bold': require('../assets/fonts/OpenSans-Bold.tff'),
@@ -11,7 +11,7 @@ const FetchFonts = () => {
 };
 
 const CategoryMealsScreen = () => {
-	const [fontLoaded, setFontLaded] = useState(false);
+	const [fontLoaded, setFontLoaded] = useState(false);
 
 	if (!fontLoaded) {
 		return (
@@ -29,12 +29,6 @@ const CategoryMealsScreen = () => {
 		</View>
 	);
 };
-
-<AppLoading
-	startAsync={fetchFonts}
-	onFinish={() => setFontLoaded(true)}
-	onError={(err) => console.log(err)}
-/>;
 
 const styles = StyleSheet.create({
 	screen: {
