@@ -1,31 +1,18 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
-import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
 
-const fetchFonts = () => {
-	Font.loadAsync({
-		'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
-		'open-sans-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
-	});
-};
+import { View, StyleSheet, Button, Text } from 'react-native';
+
+import { CATEGORIES } from '../data/data';
 
 const CategoryMealsScreen = ({ navigation }) => {
-	const [fontLoaded, setFontLoaded] = useState(false);
+	const catId = navigation.getParam('categoryId');
+	console.log(catId);
 
-	if (!fontLoaded) {
-		return (
-			<AppLoading
-				startAsync={fetchFonts}
-				onFinish={() => setFontLoaded(true)}
-				onError={(err) => console.log(err)}
-			/>
-		);
-	}
+	const selectCategory = CATEGORIES.find((cat) => cat.id === catId);
 
 	return (
 		<View style={styles.screen}>
-			<Text>CategoryMealsScreen</Text>
+			<Text>{selectCategory.title}</Text>
 			<Button
 				title='Go to Meal Details!'
 				onPress={() => {
