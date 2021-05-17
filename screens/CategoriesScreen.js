@@ -6,7 +6,6 @@ import {
 	TouchableOpacity,
 	FlatList,
 } from 'react-native';
-import Colors from '../assets/Colors';
 import { CATEGORIES } from '../data/data';
 
 const CategoriesScreen = ({ navigation }) => {
@@ -30,7 +29,6 @@ const CategoriesScreen = ({ navigation }) => {
 		);
 	};
 
-	// console.log('navigation ', JSON.stringify(navigation));
 	return (
 		<FlatList
 			keyExtractor={(item, i) => item.id}
@@ -40,14 +38,6 @@ const CategoriesScreen = ({ navigation }) => {
 		/>
 	);
 };
-CategoriesScreen.navigationOptions = {
-	headerTitle: 'Meal Categories',
-	headerStyle: {
-		backgroundColor: Colors.primary,
-	},
-	headerTintColor: 'white',
-};
-console.log('func ', CategoriesScreen.navigationOptions);
 
 const styles = StyleSheet.create({
 	screen: {
