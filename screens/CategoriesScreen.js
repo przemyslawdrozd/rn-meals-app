@@ -7,25 +7,23 @@ import {
 	FlatList,
 } from 'react-native';
 import { CATEGORIES } from '../data/data';
+import CategoryGridTile from '../components/CategoryGridTile';
 
 const CategoriesScreen = ({ navigation }) => {
-	const renderGridItem = (itemData) => {
+	const renderGridItem = ({ item }) => {
 		return (
-			<TouchableOpacity
-				style={styles.gridItem}
-				onPress={() =>
+			<CategoryGridTile
+				title={item.title}
+				color={item.color}
+				onSelect={() =>
 					navigation.navigate({
 						routeName: 'CategoryMeals',
 						params: {
-							categoryId: itemData.item.id,
+							categoryId: item.id,
 						},
 					})
 				}
-			>
-				<View>
-					<Text>{itemData.item.title}</Text>
-				</View>
-			</TouchableOpacity>
+			/>
 		);
 	};
 
