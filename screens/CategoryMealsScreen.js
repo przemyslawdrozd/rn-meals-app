@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, FlatList, Text } from 'react-native';
+import MealItem from '../components/MealItem';
 import { CATEGORIES, MEALS } from '../data/data';
 
 const CategoryMealsScreen = ({ navigation }) => {
 	const renderMealItem = (itemData) => {
-		return (
-			<View>
-				<Text>{itemData.item.title}</Text>
-			</View>
-		);
+		return <MealItem item={itemData.item} onSelectMeal={() => {}} />;
 	};
 
 	const catId = navigation.getParam('categoryId');
@@ -22,6 +19,7 @@ const CategoryMealsScreen = ({ navigation }) => {
 	return (
 		<View style={styles.screen}>
 			<FlatList
+				style={{ width: '100%' }}
 				data={displayedMeals}
 				keyExtractor={(item, i) => item.id}
 				renderItem={renderMealItem}
@@ -32,9 +30,7 @@ const CategoryMealsScreen = ({ navigation }) => {
 
 CategoryMealsScreen.navigationOptions = (navData) => {
 	const catId = navData.navigation.getParam('categoryId');
-
 	const selectCategory = CATEGORIES.find((cat) => cat.id === catId);
-
 	return {
 		headerTitle: selectCategory.title,
 	};
