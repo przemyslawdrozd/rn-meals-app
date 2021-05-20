@@ -4,8 +4,18 @@ import MealItem from '../components/MealItem';
 import { CATEGORIES, MEALS } from '../data/data';
 
 const CategoryMealsScreen = ({ navigation }) => {
-	const renderMealItem = (itemData) => {
-		return <MealItem item={itemData.item} onSelectMeal={() => {}} />;
+	const renderMealItem = ({ item }) => {
+		return (
+			<MealItem
+				item={item}
+				onSelectMeal={() =>
+					navigation.navigate({
+						routeName: 'MealDetail',
+						params: { mealId: item.id },
+					})
+				}
+			/>
+		);
 	};
 
 	const catId = navigation.getParam('categoryId');
