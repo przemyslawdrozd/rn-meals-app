@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
 		height: 150,
 		// To fix opacity when clicked
 		borderRadius: 10,
-		overflow: 'hidden',
+		overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+		elevation: 5,
 	},
 	containter: {
 		flex: 1,
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.36,
 		shadowOffset: { width: 0, height: 5 },
 		shadowRadius: 10,
-		elevation: 3,
 		padding: 15,
 		justifyContent: 'flex-end',
 		alignItems: 'flex-end',
