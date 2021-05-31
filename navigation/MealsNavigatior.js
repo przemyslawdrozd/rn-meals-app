@@ -14,6 +14,13 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import { createAppContainer } from 'react-navigation';
 import { Platform } from 'react-native';
 
+const defaultStavkNavOptions = {
+	headerStyle: {
+		backgroundColor: Colors.primary,
+	},
+	headerTintColor: 'white',
+};
+
 const MealsNavigator = createStackNavigator(
 	{
 		// config how to switch between
@@ -21,19 +28,22 @@ const MealsNavigator = createStackNavigator(
 		CategoryMeals: {
 			screen: CategoryMealsScreen,
 			navigationOptions: {
-				headerTitle: 'Meal Catecories',
+				headerTitle: 'Meal Categories',
 			},
 		},
 		MealDetail: MealDetailScreen,
 	},
 	{
-		defaultNavigationOptions: {
-			headerStyle: {
-				backgroundColor: Colors.primary,
-			},
-			headerTintColor: 'white',
-		},
+		defaultNavigationOptions: defaultStavkNavOptions,
 	}
+);
+
+const FavNavigator = createStackNavigator(
+	{
+		Favorites: FavoritesScreen,
+		MealDetail: MealDetailScreen,
+	},
+	{ defaultNavigationOptions: defaultStavkNavOptions }
 );
 
 const tabScreenConfig = {
@@ -47,7 +57,7 @@ const tabScreenConfig = {
 		tabBarColor: Colors.primary,
 	},
 	Favorites: {
-		screen: FavoritesScreen,
+		screen: FavNavigator,
 		navigationOptions: {
 			tabBarIcon: ({ tintColor }) => {
 				return <Ionicons name='ios-star' size={25} color={tintColor} />;
