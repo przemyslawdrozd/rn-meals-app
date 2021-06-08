@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Switch, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import Colors from "../assets/Colors";
 import HeaderButton from "../components/HeaderButton";
+
+import { createStackNavigator } from "react-navigation-stack";
 
 const FilterSwitch = ({ label, state, onChange }) => (
   <View style={styles.filterContainer}>
@@ -16,11 +18,28 @@ const FilterSwitch = ({ label, state, onChange }) => (
   </View>
 );
 
-const FiltersScreen = () => {
+const FiltersScreen = ({ navigation }) => {
   const [isGlutenFree, setIsGlutenFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
+
+  const saveFilters = useCallback(() => {
+    const applyFilters = {
+      glutenFree: isGlutenFree,
+      lactoseFree: isLactoseFree,
+      vegan: isVegan,
+      vegetarian: isVegetarian,
+    };
+
+    console.log("apply", applyFilters);
+  }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+
+  useEffect(() => {
+    console.log("start");
+    navigation.setParams({ onSave: saveFilters });
+    console.log("elooo effect");
+  }, [saveFilters]);
 
   return (
     <View style={styles.screen}>
@@ -62,11 +81,9 @@ FiltersScreen.navigationOptions = (navData) => {
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
-          title="Menu"
+          title="Save"
           iconName="ios-save"
-          onPress={() => {
-            console.log("saving..");
-          }}
+          onPress={navData.navigation.getParam("onSave")}
         />
       </HeaderButtons>
     ),
