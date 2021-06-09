@@ -1,4 +1,4 @@
-import MEALS from "../../data/data";
+import { MEALS } from '../../data/data';
 
 const initState = {
   meals: MEALS,
@@ -9,3 +9,5 @@ const initState = {
 const mealsReducer = (state = initState, action) => {
   return state;
 };
+
+export default mealsReducer;

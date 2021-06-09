@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, Switch, Platform } from "react-native";
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import Colors from "../assets/Colors";
-import HeaderButton from "../components/HeaderButton";
-
-import { createStackNavigator } from "react-navigation-stack";
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet, Switch, Platform } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import Colors from '../assets/Colors';
+import HeaderButton from '../components/HeaderButton';
 
 const FilterSwitch = ({ label, state, onChange }) => (
   <View style={styles.filterContainer}>
     <Text>{label}</Text>
     <Switch
       trackColor={{ true: Colors.primary }}
-      thumbColor={Platform.OS === "android" ? Colors.primary : "white"}
+      thumbColor={Platform.OS === 'android' ? Colors.primary : 'white'}
       value={state}
       onValueChange={(newValue) => onChange(newValue)}
     />
@@ -32,31 +30,29 @@ const FiltersScreen = ({ navigation }) => {
       vegetarian: isVegetarian,
     };
 
-    console.log("apply", applyFilters);
+    console.log('apply', applyFilters);
   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
 
   useEffect(() => {
-    console.log("start");
     navigation.setParams({ onSave: saveFilters });
-    console.log("elooo effect");
   }, [saveFilters]);
 
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Available Filters:</Text>
       <FilterSwitch
-        label="gluten-free"
+        label='gluten-free'
         state={isGlutenFree}
         onChange={setIsGlutenFree}
       />
       <FilterSwitch
-        label="lactose-free"
+        label='lactose-free'
         state={isLactoseFree}
         onChange={setIsLactoseFree}
       />
-      <FilterSwitch label="vegan" state={isVegan} onChange={setIsVegan} />
+      <FilterSwitch label='vegan' state={isVegan} onChange={setIsVegan} />
       <FilterSwitch
-        label="vegetarian"
+        label='vegetarian'
         state={isVegetarian}
         onChange={setIsVegetarian}
       />
@@ -66,12 +62,12 @@ const FiltersScreen = ({ navigation }) => {
 
 FiltersScreen.navigationOptions = (navData) => {
   return {
-    headerTitle: "Filter Meals",
+    headerTitle: 'Filter Meals',
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
-          title="Menu"
-          iconName="ios-menu"
+          title='Menu'
+          iconName='ios-menu'
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
@@ -81,9 +77,9 @@ FiltersScreen.navigationOptions = (navData) => {
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
-          title="Save"
-          iconName="ios-save"
-          onPress={navData.navigation.getParam("onSave")}
+          title='Save'
+          iconName='ios-save'
+          onPress={navData.navigation.getParam('onSave')}
         />
       </HeaderButtons>
     ),
@@ -93,19 +89,19 @@ FiltersScreen.navigationOptions = (navData) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   title: {
-    fontFamily: "open-sans-bold",
+    fontFamily: 'open-sans-bold',
     fontSize: 22,
     margin: 20,
-    textAlign: "center",
+    textAlign: 'center',
   },
   filterContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "80%",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '80%',
     marginVertical: 15,
   },
 });
